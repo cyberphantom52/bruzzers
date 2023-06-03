@@ -1,0 +1,14 @@
+.nav-title{
+    justify-content: center;
+    align-items: center;
+}
+.buzz-logo{
+    width: 200px;
+    height: 200px;
+    margin: auto;
+}
+.header{
+    display: flex;
+    justify-content: center;
+    margin-bottom: -120px;
+}
