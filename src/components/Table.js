@@ -147,6 +147,9 @@ export default function Table(game) {
           ) : null}
           <div id="buzzer">
             <button
+              style={{
+                background: 'linear-gradient(to right, #ff416c, #ff4b2b)',
+              }}
               ref={buzzButton}
               disabled={buzzed || game.G.locked}
               onClick={() => {
