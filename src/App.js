@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from 'react-router-dom';
-import { get, isNil } from 'lodash';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Lobby from './containers/Lobby';
 import Game from './containers/Game';
@@ -21,31 +15,10 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Switch>
-          <Route
-            path="/:id"
-            render={({ location, match }) => {
-              const roomID = get(match, 'params.id');
-              // redirect if the roomID in auth doesn't match, or no credentials
-              return roomID &&
-                auth.roomID === roomID &&
-                !isNil(auth.credentials) &&
-                !isNil(auth.playerID) ? (
-                <Game auth={auth} setAuth={setAuth} />
-              ) : (
-                <Redirect
-                  to={{
-                    pathname: '/',
-                    state: { from: location, roomID },
-                  }}
-                />
-              );
-            }}
-          />
-          <Route path="/">
-            <Lobby setAuth={setAuth} />
-          </Route>
-        </Switch>
+        <Routes>
+          <Route path="/:id" element={<Game auth={auth} setAuth={setAuth} />} />
+          <Route path="/" element={<Lobby setAuth={setAuth} />} />
+        </Routes>
       </Router>
     </div>
   );

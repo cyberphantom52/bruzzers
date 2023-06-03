@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar } from 'react-bootstrap';
 import { isNil } from 'lodash';
-import { useHistory } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { leaveRoom } from '../lib/endpoints';
 
 function Logo({ size = 25 }) {
@@ -27,18 +27,18 @@ export default function Header({
   sound = null,
   setSound,
 }) {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // leave current game
   async function leave() {
     try {
       await leaveRoom(auth.roomID, auth.playerID, auth.credentials);
       clearAuth();
-      history.push('/');
+      navigate('/');
     } catch (error) {
       console.log('leave error', error);
       clearAuth();
-      history.push('/');
+      navigate('/');
     }
   }
 
